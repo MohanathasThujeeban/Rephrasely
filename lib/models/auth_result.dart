@@ -10,15 +10,15 @@ enum AuthResult {
   operationNotAllowed,
   networkError,
   cancelled,
-  unknown
+  unknown,
 }
 
 class AuthException implements Exception {
   final String message;
   final AuthResult result;
-  
+
   const AuthException(this.message, this.result);
-  
+
   @override
   String toString() => 'AuthException: $message';
 }

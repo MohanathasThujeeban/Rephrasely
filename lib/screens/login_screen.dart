@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../constants/app_constants.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/custom_text_field.dart';
+import '../widgets/rephrasely_logo.dart';
 import '../providers/auth_provider.dart';
 import 'register_screen.dart';
 import 'forgot_password_screen.dart';
@@ -94,24 +95,9 @@ class _LoginScreenState extends State<LoginScreen>
                               ],
                             ),
                             const SizedBox(height: AppSizes.lg),
-                            Container(
-                              padding: const EdgeInsets.all(AppSizes.lg),
-                              decoration: BoxDecoration(
-                                gradient: AppColors.primaryGradient,
-                                shape: BoxShape.circle,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: AppColors.primary.withOpacity(0.3),
-                                    blurRadius: 20,
-                                    offset: const Offset(0, 8),
-                                  ),
-                                ],
-                              ),
-                              child: const Icon(
-                                Icons.login,
-                                size: 40,
-                                color: Colors.white,
-                              ),
+                            const RephraselyLogo(
+                              size: 80,
+                              animate: true,
                             ),
                             const SizedBox(height: AppSizes.lg),
                             Text(

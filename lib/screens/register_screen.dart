@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../constants/app_constants.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/custom_text_field.dart';
+import '../widgets/rephrasely_logo.dart';
 import '../providers/auth_provider.dart';
 import 'login_screen.dart';
 
@@ -103,24 +104,9 @@ class _RegisterScreenState extends State<RegisterScreen> with TickerProviderStat
                               ],
                             ),
                             const SizedBox(height: AppSizes.md),
-                            Container(
-                              padding: const EdgeInsets.all(AppSizes.lg),
-                              decoration: BoxDecoration(
-                                gradient: AppColors.primaryGradient,
-                                shape: BoxShape.circle,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: AppColors.primary.withOpacity(0.3),
-                                    blurRadius: 20,
-                                    offset: const Offset(0, 8),
-                                  ),
-                                ],
-                              ),
-                              child: const Icon(
-                                Icons.person_add,
-                                size: 40,
-                                color: Colors.white,
-                              ),
+                            const RephraselyLogo(
+                              size: 80,
+                              animate: true,
                             ),
                             const SizedBox(height: AppSizes.lg),
                             Text(

@@ -43,7 +43,7 @@ class AuthService {
         email: email.trim(),
         password: password,
       );
-      
+
       if (result.user != null) {
         await _updateUserDocument(result.user!);
         return AuthResult.success;
@@ -73,13 +73,13 @@ class AuthService {
         if (displayName != null && displayName.isNotEmpty) {
           await result.user!.updateDisplayName(displayName);
         }
-        
+
         // Send email verification
         await result.user!.sendEmailVerification();
-        
+
         // Create user document in Firestore
         await _createUserDocument(result.user!);
-        
+
         return AuthResult.success;
       }
       return AuthResult.unknown;
@@ -95,13 +95,14 @@ class AuthService {
     try {
       // Trigger the authentication flow
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-      
+
       if (googleUser == null) {
         return AuthResult.cancelled;
       }
 
       // Obtain the auth details from the request
-      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
 
       // Create a new credential
       final credential = GoogleAuthProvider.credential(
@@ -111,7 +112,7 @@ class AuthService {
 
       // Sign in to Firebase with the Google credential
       UserCredential result = await _auth.signInWithCredential(credential);
-      
+
       if (result.user != null) {
         await _updateUserDocument(result.user!);
         return AuthResult.success;
@@ -139,12 +140,14 @@ class AuthService {
       }
 
       // Create a credential from the access token
-      final OAuthCredential facebookAuthCredential = 
+      final OAuthCredential facebookAuthCredential =
           FacebookAuthProvider.credential(loginResult.accessToken!.tokenString);
 
       // Sign in to Firebase with the Facebook credential
-      UserCredential result = await _auth.signInWithCredential(facebookAuthCredential);
-      
+      UserCredential result = await _auth.signInWithCredential(
+        facebookAuthCredential,
+      );
+
       if (result.user != null) {
         await _updateUserDocument(result.user!);
         return AuthResult.success;
@@ -221,7 +224,7 @@ class AuthService {
   Future<void> _updateUserDocument(User user) async {
     final userDoc = _firestore.collection('users').doc(user.uid);
     final docSnapshot = await userDoc.get();
-    
+
     if (docSnapshot.exists) {
       // Update existing document
       await userDoc.update({

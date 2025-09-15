@@ -48,8 +48,12 @@ class UserModel {
       displayName: map['displayName'],
       photoURL: map['photoURL'],
       isEmailVerified: map['isEmailVerified'] ?? false,
-      createdAt: map['createdAt'] != null ? DateTime.parse(map['createdAt']) : null,
-      lastSignIn: map['lastSignIn'] != null ? DateTime.parse(map['lastSignIn']) : null,
+      createdAt: map['createdAt'] != null
+          ? DateTime.parse(map['createdAt'])
+          : null,
+      lastSignIn: map['lastSignIn'] != null
+          ? DateTime.parse(map['lastSignIn'])
+          : null,
     );
   }
 
@@ -81,25 +85,25 @@ class UserModel {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-  
+
     return other is UserModel &&
-      other.uid == uid &&
-      other.email == email &&
-      other.displayName == displayName &&
-      other.photoURL == photoURL &&
-      other.isEmailVerified == isEmailVerified &&
-      other.createdAt == createdAt &&
-      other.lastSignIn == lastSignIn;
+        other.uid == uid &&
+        other.email == email &&
+        other.displayName == displayName &&
+        other.photoURL == photoURL &&
+        other.isEmailVerified == isEmailVerified &&
+        other.createdAt == createdAt &&
+        other.lastSignIn == lastSignIn;
   }
 
   @override
   int get hashCode {
     return uid.hashCode ^
-      email.hashCode ^
-      displayName.hashCode ^
-      photoURL.hashCode ^
-      isEmailVerified.hashCode ^
-      createdAt.hashCode ^
-      lastSignIn.hashCode;
+        email.hashCode ^
+        displayName.hashCode ^
+        photoURL.hashCode ^
+        isEmailVerified.hashCode ^
+        createdAt.hashCode ^
+        lastSignIn.hashCode;
   }
 }

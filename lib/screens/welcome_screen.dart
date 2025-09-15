@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import '../constants/app_constants.dart';
 import '../widgets/custom_button.dart';
+import '../widgets/rephrasely_logo.dart';
 import 'login_screen.dart';
 import 'register_screen.dart';
 
@@ -84,35 +85,12 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        // Logo/Animation placeholder
-                        Container(
-                          width: 200,
-                          height: 200,
-                          decoration: BoxDecoration(
-                            gradient: AppColors.primaryGradient,
-                            shape: BoxShape.circle,
-                            boxShadow: [
-                              BoxShadow(
-                                color: AppColors.primary.withOpacity(0.3),
-                                blurRadius: 30,
-                                offset: const Offset(0, 10),
-                              ),
-                            ],
-                          ),
-                          child: const Icon(
-                            Icons.auto_fix_high,
-                            size: 80,
-                            color: Colors.white,
-                          ),
-                        ),
-                        const SizedBox(height: AppSizes.xl),
-                        Text(
-                          'Rephrasely',
-                          style: AppTextStyles.heading1.copyWith(
-                            fontSize: 36,
-                            fontWeight: FontWeight.w800,
-                            color: AppColors.primary,
-                          ),
+                        // Rephrasely Logo
+                        const RephraselyLogo(
+                          size: 200,
+                          showText: true,
+                          textSize: 36,
+                          animate: true,
                         ),
                         const SizedBox(height: AppSizes.md),
                         Text(
