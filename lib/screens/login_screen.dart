@@ -95,10 +95,7 @@ class _LoginScreenState extends State<LoginScreen>
                               ],
                             ),
                             const SizedBox(height: AppSizes.lg),
-                            const RephraselyLogo(
-                              size: 80,
-                              animate: true,
-                            ),
+                            const RephraselyLogo(size: 80, animate: true),
                             const SizedBox(height: AppSizes.lg),
                             Text(
                               'Welcome Back!',

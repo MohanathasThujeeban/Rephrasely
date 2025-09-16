@@ -13,7 +13,7 @@ class WelcomeScreen extends StatefulWidget {
   State<WelcomeScreen> createState() => _WelcomeScreenState();
 }
 
-class _WelcomeScreenState extends State<WelcomeScreen> 
+class _WelcomeScreenState extends State<WelcomeScreen>
     with TickerProviderStateMixin {
   late AnimationController _fadeController;
   late AnimationController _slideController;
@@ -23,33 +23,26 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   @override
   void initState() {
     super.initState();
-    
+
     _fadeController = AnimationController(
       duration: const Duration(milliseconds: 1000),
       vsync: this,
     );
-    
+
     _slideController = AnimationController(
       duration: const Duration(milliseconds: 800),
       vsync: this,
     );
-    
-    _fadeAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _fadeController,
-      curve: Curves.easeInOut,
-    ));
-    
-    _slideAnimation = Tween<Offset>(
-      begin: const Offset(0, 0.3),
-      end: Offset.zero,
-    ).animate(CurvedAnimation(
-      parent: _slideController,
-      curve: Curves.easeOutBack,
-    ));
-    
+
+    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _fadeController, curve: Curves.easeInOut),
+    );
+
+    _slideAnimation =
+        Tween<Offset>(begin: const Offset(0, 0.3), end: Offset.zero).animate(
+          CurvedAnimation(parent: _slideController, curve: Curves.easeOutBack),
+        );
+
     // Start animations
     _fadeController.forward();
     Future.delayed(const Duration(milliseconds: 300), () {
@@ -67,12 +60,10 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    
+
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
-          gradient: AppColors.backgroundGradient,
-        ),
+        decoration: const BoxDecoration(gradient: AppColors.backgroundGradient),
         child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: AppSizes.lg),
@@ -111,79 +102,82 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                     position: _slideAnimation,
                     child: FadeTransition(
                       opacity: _fadeAnimation,
-                      child: Column(
-                        children: [
-                          // Features
-                          Row(
-                            children: [
-                              Expanded(
-                                child: _buildFeatureCard(
-                                  icon: Icons.summarize,
-                                  title: 'Summarize',
-                                  description: 'Quick text summaries',
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            // Features
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: _buildFeatureCard(
+                                    icon: Icons.summarize,
+                                    title: 'Summarize',
+                                    description: 'Quick text summaries',
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(width: AppSizes.md),
-                              Expanded(
-                                child: _buildFeatureCard(
-                                  icon: Icons.edit_note,
-                                  title: 'Paraphrase',
-                                  description: 'Rewrite content',
+                                const SizedBox(width: AppSizes.md),
+                                Expanded(
+                                  child: _buildFeatureCard(
+                                    icon: Icons.edit_note,
+                                    title: 'Paraphrase',
+                                    description: 'Rewrite content',
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: AppSizes.lg),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: _buildFeatureCard(
-                                  icon: Icons.speed,
-                                  title: 'Fast',
-                                  description: 'Instant results',
+                              ],
+                            ),
+                            const SizedBox(height: AppSizes.lg),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: _buildFeatureCard(
+                                    icon: Icons.speed,
+                                    title: 'Fast',
+                                    description: 'Instant results',
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(width: AppSizes.md),
-                              Expanded(
-                                child: _buildFeatureCard(
-                                  icon: Icons.security,
-                                  title: 'Secure',
-                                  description: 'Privacy focused',
+                                const SizedBox(width: AppSizes.md),
+                                Expanded(
+                                  child: _buildFeatureCard(
+                                    icon: Icons.security,
+                                    title: 'Secure',
+                                    description: 'Privacy focused',
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          const Spacer(),
-                          // Action buttons
-                          Column(
-                            children: [
-                              SizedBox(
-                                width: double.infinity,
-                                child: CustomButton(
-                                  text: 'Get Started',
-                                  onPressed: () => _navigateToRegister(context),
-                                  backgroundColor: AppColors.primary,
+                              ],
+                            ),
+                            const SizedBox(height: AppSizes.xl),
+                            // Action buttons
+                            Column(
+                              children: [
+                                SizedBox(
+                                  width: double.infinity,
+                                  child: CustomButton(
+                                    text: 'Get Started',
+                                    onPressed: () =>
+                                        _navigateToRegister(context),
+                                    backgroundColor: AppColors.primary,
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(height: AppSizes.md),
-                              SizedBox(
-                                width: double.infinity,
-                                child: CustomButton(
-                                  text: 'Sign In',
-                                  onPressed: () => _navigateToLogin(context),
-                                  isOutlined: true,
-                                  backgroundColor: AppColors.primary,
+                                const SizedBox(height: AppSizes.md),
+                                SizedBox(
+                                  width: double.infinity,
+                                  child: CustomButton(
+                                    text: 'Sign In',
+                                    onPressed: () => _navigateToLogin(context),
+                                    isOutlined: true,
+                                    backgroundColor: AppColors.primary,
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(height: AppSizes.lg),
-                              Text(
-                                'By continuing, you agree to our Terms of Service\nand Privacy Policy',
-                                textAlign: TextAlign.center,
-                                style: AppTextStyles.bodySmall,
-                              ),
-                            ],
-                          ),
-                        ],
+                                const SizedBox(height: AppSizes.lg),
+                                Text(
+                                  'By continuing, you agree to our Terms of Service\nand Privacy Policy',
+                                  textAlign: TextAlign.center,
+                                  style: AppTextStyles.bodySmall,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -250,15 +244,17 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   void _navigateToLogin(BuildContext context) {
     Navigator.of(context).push(
       PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) => const LoginScreen(),
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            const LoginScreen(),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           const begin = Offset(1.0, 0.0);
           const end = Offset.zero;
           const curve = Curves.ease;
 
-          var tween = Tween(begin: begin, end: end).chain(
-            CurveTween(curve: curve),
-          );
+          var tween = Tween(
+            begin: begin,
+            end: end,
+          ).chain(CurveTween(curve: curve));
 
           return SlideTransition(
             position: animation.drive(tween),
@@ -272,15 +268,17 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   void _navigateToRegister(BuildContext context) {
     Navigator.of(context).push(
       PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) => const RegisterScreen(),
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            const RegisterScreen(),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           const begin = Offset(1.0, 0.0);
           const end = Offset.zero;
           const curve = Curves.ease;
 
-          var tween = Tween(begin: begin, end: end).chain(
-            CurveTween(curve: curve),
-          );
+          var tween = Tween(
+            begin: begin,
+            end: end,
+          ).chain(CurveTween(curve: curve));
 
           return SlideTransition(
             position: animation.drive(tween),

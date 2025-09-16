@@ -14,15 +14,16 @@ class RegisterScreen extends StatefulWidget {
   State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> with TickerProviderStateMixin {
+class _RegisterScreenState extends State<RegisterScreen>
+    with TickerProviderStateMixin {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
-  
+
   bool _acceptTerms = false;
-  
+
   late AnimationController _animationController;
   late Animation<double> _fadeAnimation;
   late Animation<Offset> _slideAnimation;
@@ -30,28 +31,24 @@ class _RegisterScreenState extends State<RegisterScreen> with TickerProviderStat
   @override
   void initState() {
     super.initState();
-    
+
     _animationController = AnimationController(
       duration: const Duration(milliseconds: 800),
       vsync: this,
     );
-    
-    _fadeAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _animationController,
-      curve: Curves.easeInOut,
-    ));
-    
-    _slideAnimation = Tween<Offset>(
-      begin: const Offset(0, 0.2),
-      end: Offset.zero,
-    ).animate(CurvedAnimation(
-      parent: _animationController,
-      curve: Curves.easeOutCubic,
-    ));
-    
+
+    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
+    );
+
+    _slideAnimation =
+        Tween<Offset>(begin: const Offset(0, 0.2), end: Offset.zero).animate(
+          CurvedAnimation(
+            parent: _animationController,
+            curve: Curves.easeOutCubic,
+          ),
+        );
+
     _animationController.forward();
   }
 
@@ -69,18 +66,17 @@ class _RegisterScreenState extends State<RegisterScreen> with TickerProviderStat
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
-          gradient: AppColors.backgroundGradient,
-        ),
+        decoration: const BoxDecoration(gradient: AppColors.backgroundGradient),
         child: SafeArea(
           child: SingleChildScrollView(
             padding: const EdgeInsets.all(AppSizes.lg),
             child: ConstrainedBox(
               constraints: BoxConstraints(
-                minHeight: MediaQuery.of(context).size.height - 
-                          MediaQuery.of(context).padding.top - 
-                          MediaQuery.of(context).padding.bottom - 
-                          (AppSizes.lg * 2),
+                minHeight:
+                    MediaQuery.of(context).size.height -
+                    MediaQuery.of(context).padding.top -
+                    MediaQuery.of(context).padding.bottom -
+                    (AppSizes.lg * 2),
               ),
               child: IntrinsicHeight(
                 child: Column(
@@ -104,14 +100,13 @@ class _RegisterScreenState extends State<RegisterScreen> with TickerProviderStat
                               ],
                             ),
                             const SizedBox(height: AppSizes.md),
-                            const RephraselyLogo(
-                              size: 80,
-                              animate: true,
-                            ),
+                            const RephraselyLogo(size: 80, animate: true),
                             const SizedBox(height: AppSizes.lg),
                             Text(
                               'Create Account',
-                              style: AppTextStyles.heading1.copyWith(fontSize: 28),
+                              style: AppTextStyles.heading1.copyWith(
+                                fontSize: 28,
+                              ),
                             ),
                             const SizedBox(height: AppSizes.sm),
                             Text(
@@ -124,7 +119,7 @@ class _RegisterScreenState extends State<RegisterScreen> with TickerProviderStat
                       ),
                     ),
                     const SizedBox(height: AppSizes.xl),
-                    
+
                     // Form
                     Expanded(
                       child: SlideTransition(
@@ -136,23 +131,29 @@ class _RegisterScreenState extends State<RegisterScreen> with TickerProviderStat
                               // Social Login Buttons
                               _buildSocialButtons(),
                               const SizedBox(height: AppSizes.lg),
-                              
+
                               // Divider
                               Row(
                                 children: [
-                                  const Expanded(child: Divider(color: AppColors.border)),
+                                  const Expanded(
+                                    child: Divider(color: AppColors.border),
+                                  ),
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: AppSizes.md),
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: AppSizes.md,
+                                    ),
                                     child: Text(
                                       'Or sign up with email',
                                       style: AppTextStyles.bodySmall,
                                     ),
                                   ),
-                                  const Expanded(child: Divider(color: AppColors.border)),
+                                  const Expanded(
+                                    child: Divider(color: AppColors.border),
+                                  ),
                                 ],
                               ),
                               const SizedBox(height: AppSizes.lg),
-                              
+
                               // Registration Form
                               Form(
                                 key: _formKey,
@@ -192,7 +193,7 @@ class _RegisterScreenState extends State<RegisterScreen> with TickerProviderStat
                                 ),
                               ),
                               const SizedBox(height: AppSizes.md),
-                              
+
                               // Terms and Conditions
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -205,7 +206,8 @@ class _RegisterScreenState extends State<RegisterScreen> with TickerProviderStat
                                       });
                                     },
                                     activeColor: AppColors.primary,
-                                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                    materialTapTargetSize:
+                                        MaterialTapTargetSize.shrinkWrap,
                                   ),
                                   const SizedBox(width: AppSizes.sm),
                                   Expanded(
@@ -216,18 +218,20 @@ class _RegisterScreenState extends State<RegisterScreen> with TickerProviderStat
                                         children: [
                                           TextSpan(
                                             text: 'Terms of Service',
-                                            style: AppTextStyles.bodySmall.copyWith(
-                                              color: AppColors.primary,
-                                              fontWeight: FontWeight.w600,
-                                            ),
+                                            style: AppTextStyles.bodySmall
+                                                .copyWith(
+                                                  color: AppColors.primary,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
                                           ),
                                           const TextSpan(text: ' and '),
                                           TextSpan(
                                             text: 'Privacy Policy',
-                                            style: AppTextStyles.bodySmall.copyWith(
-                                              color: AppColors.primary,
-                                              fontWeight: FontWeight.w600,
-                                            ),
+                                            style: AppTextStyles.bodySmall
+                                                .copyWith(
+                                                  color: AppColors.primary,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
                                           ),
                                         ],
                                       ),
@@ -236,7 +240,7 @@ class _RegisterScreenState extends State<RegisterScreen> with TickerProviderStat
                                 ],
                               ),
                               const SizedBox(height: AppSizes.lg),
-                              
+
                               // Register Button
                               Consumer<AuthProvider>(
                                 builder: (context, authProvider, child) {
@@ -246,24 +250,32 @@ class _RegisterScreenState extends State<RegisterScreen> with TickerProviderStat
                                         width: double.infinity,
                                         child: CustomButton(
                                           text: 'Create Account',
-                                          onPressed: _acceptTerms 
+                                          onPressed: _acceptTerms
                                               ? () => _handleRegister(context)
                                               : () {},
                                           isLoading: authProvider.isLoading,
-                                          backgroundColor: _acceptTerms 
-                                              ? AppColors.primary 
+                                          backgroundColor: _acceptTerms
+                                              ? AppColors.primary
                                               : AppColors.textLight,
                                         ),
                                       ),
-                                      if (authProvider.errorMessage != null) ...[
+                                      if (authProvider.errorMessage !=
+                                          null) ...[
                                         const SizedBox(height: AppSizes.md),
                                         Container(
-                                          padding: const EdgeInsets.all(AppSizes.md),
+                                          padding: const EdgeInsets.all(
+                                            AppSizes.md,
+                                          ),
                                           decoration: BoxDecoration(
-                                            color: AppColors.error.withOpacity(0.1),
-                                            borderRadius: BorderRadius.circular(AppSizes.borderRadius),
+                                            color: AppColors.error.withOpacity(
+                                              0.1,
+                                            ),
+                                            borderRadius: BorderRadius.circular(
+                                              AppSizes.borderRadius,
+                                            ),
                                             border: Border.all(
-                                              color: AppColors.error.withOpacity(0.3),
+                                              color: AppColors.error
+                                                  .withOpacity(0.3),
                                             ),
                                           ),
                                           child: Row(
@@ -273,13 +285,16 @@ class _RegisterScreenState extends State<RegisterScreen> with TickerProviderStat
                                                 color: AppColors.error,
                                                 size: AppSizes.iconSize,
                                               ),
-                                              const SizedBox(width: AppSizes.sm),
+                                              const SizedBox(
+                                                width: AppSizes.sm,
+                                              ),
                                               Expanded(
                                                 child: Text(
                                                   authProvider.errorMessage!,
-                                                  style: AppTextStyles.bodySmall.copyWith(
-                                                    color: AppColors.error,
-                                                  ),
+                                                  style: AppTextStyles.bodySmall
+                                                      .copyWith(
+                                                        color: AppColors.error,
+                                                      ),
                                                 ),
                                               ),
                                             ],
@@ -290,9 +305,9 @@ class _RegisterScreenState extends State<RegisterScreen> with TickerProviderStat
                                   );
                                 },
                               ),
-                              
+
                               const Spacer(),
-                              
+
                               // Login Link
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -336,8 +351,8 @@ class _RegisterScreenState extends State<RegisterScreen> with TickerProviderStat
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: authProvider.isLoading 
-                    ? null 
+                onPressed: authProvider.isLoading
+                    ? null
                     : () => _handleGoogleSignUp(context),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,
@@ -345,9 +360,14 @@ class _RegisterScreenState extends State<RegisterScreen> with TickerProviderStat
                   elevation: 0,
                   side: const BorderSide(color: AppColors.border),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(AppSizes.buttonBorderRadius),
+                    borderRadius: BorderRadius.circular(
+                      AppSizes.buttonBorderRadius,
+                    ),
                   ),
-                  minimumSize: const Size(double.infinity, AppSizes.buttonHeight),
+                  minimumSize: const Size(
+                    double.infinity,
+                    AppSizes.buttonHeight,
+                  ),
                 ),
                 child: authProvider.isLoading
                     ? const SizedBox(
@@ -383,17 +403,22 @@ class _RegisterScreenState extends State<RegisterScreen> with TickerProviderStat
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: authProvider.isLoading 
-                    ? null 
+                onPressed: authProvider.isLoading
+                    ? null
                     : () => _handleFacebookSignUp(context),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.facebookBlue,
                   foregroundColor: Colors.white,
                   elevation: 0,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(AppSizes.buttonBorderRadius),
+                    borderRadius: BorderRadius.circular(
+                      AppSizes.buttonBorderRadius,
+                    ),
                   ),
-                  minimumSize: const Size(double.infinity, AppSizes.buttonHeight),
+                  minimumSize: const Size(
+                    double.infinity,
+                    AppSizes.buttonHeight,
+                  ),
                 ),
                 child: authProvider.isLoading
                     ? const SizedBox(
@@ -401,7 +426,9 @@ class _RegisterScreenState extends State<RegisterScreen> with TickerProviderStat
                         height: 20,
                         child: CircularProgressIndicator(
                           strokeWidth: 2,
-                          valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            Colors.white,
+                          ),
                         ),
                       )
                     : Row(
@@ -489,7 +516,9 @@ class _RegisterScreenState extends State<RegisterScreen> with TickerProviderStat
       // Show success message and navigate
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: const Text('Account created successfully! Please verify your email.'),
+          content: const Text(
+            'Account created successfully! Please verify your email.',
+          ),
           backgroundColor: AppColors.success,
           behavior: SnackBarBehavior.floating,
           shape: RoundedRectangleBorder(
@@ -526,15 +555,17 @@ class _RegisterScreenState extends State<RegisterScreen> with TickerProviderStat
   void _navigateToLogin(BuildContext context) {
     Navigator.of(context).pushReplacement(
       PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) => const LoginScreen(),
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            const LoginScreen(),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           const begin = Offset(-1.0, 0.0);
           const end = Offset.zero;
           const curve = Curves.ease;
 
-          var tween = Tween(begin: begin, end: end).chain(
-            CurveTween(curve: curve),
-          );
+          var tween = Tween(
+            begin: begin,
+            end: end,
+          ).chain(CurveTween(curve: curve));
 
           return SlideTransition(
             position: animation.drive(tween),

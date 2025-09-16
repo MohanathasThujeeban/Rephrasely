@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "617490770993",
+    "project_id": "rephrasely-c9a50",
+    "storage_bucket": "rephrasely-c9a50.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:617490770993:android:ab70ca079c74b9af69b910",
+        "android_client_info": {
+          "package_name": "com.example.rephrasely"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "617490770993-6htdcnt2v918n5t5hkf88s7qvmf2memd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCV4rWWkyikTuUIMifX6wEh9p6f3OKD_Hs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "617490770993-6htdcnt2v918n5t5hkf88s7qvmf2memd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

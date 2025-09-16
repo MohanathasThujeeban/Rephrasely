@@ -41,46 +41,46 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'your-web-api-key',
-    appId: 'your-web-app-id',
-    messagingSenderId: 'your-sender-id',
-    projectId: 'your-project-id',
-    authDomain: 'your-project-id.firebaseapp.com',
-    storageBucket: 'your-project-id.appspot.com',
+    apiKey: 'AIzaSyCV4rWWkyikTuUIMifX6wEh9p6f3OKD_Hs',
+    appId: '1:617490770993:web:placeholder',
+    messagingSenderId: '617490770993',
+    projectId: 'rephrasely-c9a50',
+    authDomain: 'rephrasely-c9a50.firebaseapp.com',
+    storageBucket: 'rephrasely-c9a50.firebasestorage.app',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'your-android-api-key',
-    appId: 'your-android-app-id',
-    messagingSenderId: 'your-sender-id',
-    projectId: 'your-project-id',
-    storageBucket: 'your-project-id.appspot.com',
+    apiKey: 'AIzaSyCV4rWWkyikTuUIMifX6wEh9p6f3OKD_Hs',
+    appId: '1:617490770993:android:ab70ca079c74b9af69b910',
+    messagingSenderId: '617490770993',
+    projectId: 'rephrasely-c9a50',
+    storageBucket: 'rephrasely-c9a50.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'your-ios-api-key',
-    appId: 'your-ios-app-id',
-    messagingSenderId: 'your-sender-id',
-    projectId: 'your-project-id',
-    storageBucket: 'your-project-id.appspot.com',
+    apiKey: 'AIzaSyCV4rWWkyikTuUIMifX6wEh9p6f3OKD_Hs',
+    appId: '1:617490770993:ios:placeholder',
+    messagingSenderId: '617490770993',
+    projectId: 'rephrasely-c9a50',
+    storageBucket: 'rephrasely-c9a50.firebasestorage.app',
     iosBundleId: 'com.example.rephrasely',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'your-macos-api-key',
-    appId: 'your-macos-app-id',
-    messagingSenderId: 'your-sender-id',
-    projectId: 'your-project-id',
-    storageBucket: 'your-project-id.appspot.com',
+    apiKey: 'AIzaSyCV4rWWkyikTuUIMifX6wEh9p6f3OKD_Hs',
+    appId: '1:617490770993:ios:placeholder',
+    messagingSenderId: '617490770993',
+    projectId: 'rephrasely-c9a50',
+    storageBucket: 'rephrasely-c9a50.firebasestorage.app',
     iosBundleId: 'com.example.rephrasely',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'your-windows-api-key',
-    appId: 'your-windows-app-id',
-    messagingSenderId: 'your-sender-id',
-    projectId: 'your-project-id',
-    authDomain: 'your-project-id.firebaseapp.com',
-    storageBucket: 'your-project-id.appspot.com',
+    apiKey: 'AIzaSyCV4rWWkyikTuUIMifX6wEh9p6f3OKD_Hs',
+    appId: '1:617490770993:web:placeholder',
+    messagingSenderId: '617490770993',
+    projectId: 'rephrasely-c9a50',
+    authDomain: 'rephrasely-c9a50.firebaseapp.com',
+    storageBucket: 'rephrasely-c9a50.firebasestorage.app',
   );
 }

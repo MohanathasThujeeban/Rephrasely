@@ -29,9 +29,7 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
       body: Container(
-        decoration: const BoxDecoration(
-          gradient: AppColors.backgroundGradient,
-        ),
+        decoration: const BoxDecoration(gradient: AppColors.backgroundGradient),
         child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(AppSizes.lg),
@@ -43,7 +41,9 @@ class HomeScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(AppSizes.lg),
                   decoration: BoxDecoration(
                     color: AppColors.surface,
-                    borderRadius: BorderRadius.circular(AppSizes.largeBorderRadius),
+                    borderRadius: BorderRadius.circular(
+                      AppSizes.largeBorderRadius,
+                    ),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withOpacity(0.05),
@@ -72,15 +72,17 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                
+
                 const SizedBox(height: AppSizes.xl),
-                
+
                 // Feature Cards
                 Expanded(
                   child: GridView.count(
                     crossAxisCount: 2,
                     crossAxisSpacing: AppSizes.md,
                     mainAxisSpacing: AppSizes.md,
+                    childAspectRatio: 1.0, // Increased for better content fit
+                    physics: const BouncingScrollPhysics(),
                     children: [
                       _buildFeatureCard(
                         context,
@@ -151,32 +153,39 @@ class HomeScreen extends StatelessWidget {
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              padding: const EdgeInsets.all(AppSizes.md),
+              padding: const EdgeInsets.all(AppSizes.sm),
               decoration: BoxDecoration(
                 color: color.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(AppSizes.borderRadius),
               ),
-              child: Icon(
-                icon,
-                size: AppSizes.largeIconSize,
-                color: color,
-              ),
-            ),
-            const SizedBox(height: AppSizes.md),
-            Text(
-              title,
-              style: AppTextStyles.heading3.copyWith(fontSize: 16),
-              textAlign: TextAlign.center,
+              child: Icon(icon, size: 28, color: color),
             ),
             const SizedBox(height: AppSizes.sm),
             Text(
-              description,
-              style: AppTextStyles.bodySmall,
+              title,
+              style: AppTextStyles.heading3.copyWith(
+                fontSize: 15,
+                fontWeight: FontWeight.w600,
+              ),
               textAlign: TextAlign.center,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
+            ),
+            const SizedBox(height: AppSizes.xs),
+            Expanded(
+              child: Text(
+                description,
+                style: AppTextStyles.bodySmall.copyWith(
+                  fontSize: 12,
+                  color: AppColors.textSecondary,
+                ),
+                textAlign: TextAlign.center,
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
           ],
         ),
@@ -217,16 +226,17 @@ class HomeScreen extends StatelessWidget {
                     CircleAvatar(
                       radius: 30,
                       backgroundColor: AppColors.primary,
-                      backgroundImage: user?.photoURL != null 
+                      backgroundImage: user?.photoURL != null
                           ? NetworkImage(user!.photoURL!)
                           : null,
                       child: user?.photoURL == null
                           ? Text(
-                              (user?.displayName?.isNotEmpty == true 
-                                  ? user!.displayName![0] 
-                                  : user?.email?.isNotEmpty == true 
-                                      ? user!.email[0] 
-                                      : 'U').toUpperCase(),
+                              (user?.displayName?.isNotEmpty == true
+                                      ? user!.displayName![0]
+                                      : user?.email?.isNotEmpty == true
+                                      ? user!.email[0]
+                                      : 'U')
+                                  .toUpperCase(),
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 24,
@@ -240,10 +250,7 @@ class HomeScreen extends StatelessWidget {
                       user?.displayName ?? 'User',
                       style: AppTextStyles.heading3,
                     ),
-                    Text(
-                      user?.email ?? '',
-                      style: AppTextStyles.bodyMedium,
-                    ),
+                    Text(user?.email ?? '', style: AppTextStyles.bodyMedium),
                   ],
                 );
               },
@@ -293,10 +300,7 @@ class HomeScreen extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppSizes.largeBorderRadius),
         ),
-        title: Text(
-          'Coming Soon!',
-          style: AppTextStyles.heading3,
-        ),
+        title: Text('Coming Soon!', style: AppTextStyles.heading3),
         content: Text(
           '$feature feature is currently in development and will be available soon.',
           style: AppTextStyles.bodyMedium,
@@ -306,9 +310,7 @@ class HomeScreen extends StatelessWidget {
             onPressed: () => Navigator.pop(context),
             child: Text(
               'OK',
-              style: AppTextStyles.button.copyWith(
-                color: AppColors.primary,
-              ),
+              style: AppTextStyles.button.copyWith(color: AppColors.primary),
             ),
           ),
         ],
@@ -323,10 +325,7 @@ class HomeScreen extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppSizes.largeBorderRadius),
         ),
-        title: Text(
-          'Sign Out',
-          style: AppTextStyles.heading3,
-        ),
+        title: Text('Sign Out', style: AppTextStyles.heading3),
         content: Text(
           'Are you sure you want to sign out?',
           style: AppTextStyles.bodyMedium,
@@ -342,16 +341,26 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           TextButton(
-            onPressed: () {
+            onPressed: () async {
               Navigator.pop(context);
               Navigator.pop(context); // Close bottom sheet
-              Provider.of<AuthProvider>(context, listen: false).signOut();
+              
+              final authProvider = Provider.of<AuthProvider>(context, listen: false);
+              final success = await authProvider.signOut();
+              
+              if (!success && context.mounted) {
+                // Show error message if sign out failed
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(authProvider.errorMessage ?? 'Failed to sign out'),
+                    backgroundColor: AppColors.error,
+                  ),
+                );
+              }
             },
             child: Text(
               'Sign Out',
-              style: AppTextStyles.button.copyWith(
-                color: AppColors.error,
-              ),
+              style: AppTextStyles.button.copyWith(color: AppColors.error),
             ),
           ),
         ],

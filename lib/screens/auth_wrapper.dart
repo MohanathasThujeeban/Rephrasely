@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/auth_provider.dart';
 import '../screens/welcome_screen.dart';
+import '../constants/app_constants.dart';
 import 'home_screen.dart';
 
 class AuthWrapper extends StatelessWidget {
@@ -11,11 +12,27 @@ class AuthWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<AuthProvider>(
       builder: (context, authProvider, child) {
-        // Show loading indicator while checking auth state
+        // Show loading indicator while checking auth state or during sign out
         if (authProvider.isLoading) {
-          return const Scaffold(
-            body: Center(
-              child: CircularProgressIndicator(),
+          return Scaffold(
+            body: Container(
+              decoration: const BoxDecoration(gradient: AppColors.backgroundGradient),
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CircularProgressIndicator(color: AppColors.primary),
+                    const SizedBox(height: 16),
+                    Text(
+                      'Please wait...',
+                      style: TextStyle(
+                        color: AppColors.textSecondary,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
           );
         }

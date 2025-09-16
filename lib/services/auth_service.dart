@@ -189,10 +189,31 @@ class AuthService {
   }
 
   // Sign out
-  Future<void> signOut() async {
-    await _googleSignIn.signOut();
-    await _facebookAuth.logOut();
-    await _auth.signOut();
+  Future<AuthResult> signOut() async {
+    try {
+      // Sign out from Google (if signed in)
+      try {
+        await _googleSignIn.signOut();
+      } catch (e) {
+        // Google sign out can fail if user wasn't signed in with Google
+        // This is not a critical error, so we continue
+      }
+      
+      // Sign out from Facebook (if signed in)
+      try {
+        await _facebookAuth.logOut();
+      } catch (e) {
+        // Facebook sign out can fail if user wasn't signed in with Facebook
+        // This is not a critical error, so we continue
+      }
+      
+      // Sign out from Firebase (this is the most important one)
+      await _auth.signOut();
+      
+      return AuthResult.success;
+    } catch (e) {
+      return AuthResult.unknown;
+    }
   }
 
   // Delete account
