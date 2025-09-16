@@ -198,27 +198,15 @@ class AuthProvider extends ChangeNotifier {
   }
   
   // Sign out
-  Future<bool> signOut() async {
+  Future<void> signOut() async {
     _setLoading(true);
-    _setError(null);
-    
     try {
-      final result = await _authService.signOut();
-      
-      if (result == AuthResult.success) {
-        // Don't manually set _user to null here, let the auth state stream handle it
-        // This prevents race conditions and ensures proper state management
-        _setLoading(false);
-        return true;
-      } else {
-        _setError('Failed to sign out. Please try again.');
-        _setLoading(false);
-        return false;
-      }
-    } catch (e) {
-      _setError('An unexpected error occurred during sign out');
+      await _authService.signOut();
+      _user = null;
       _setLoading(false);
-      return false;
+    } catch (e) {
+      _setError('Failed to sign out');
+      _setLoading(false);
     }
   }
   

@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from app.services.text_service_lite import TextService
+from app.services.text_service_mock import TextService
 from app.models.text_models import TextRequest, TextResponse
 import traceback
 

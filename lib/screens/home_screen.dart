@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import '../constants/app_constants.dart';
 import '../providers/auth_provider.dart';
 import '../widgets/rephrasely_logo.dart';
+import 'summarize_screen.dart';
+import 'paraphrase_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -90,7 +92,10 @@ class HomeScreen extends StatelessWidget {
                         description: 'Get quick summaries of long text',
                         icon: Icons.summarize,
                         color: AppColors.primary,
-                        onTap: () => _showComingSoon(context, 'Summarize'),
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const SummarizeScreen()),
+                        ),
                       ),
                       _buildFeatureCard(
                         context,
@@ -98,7 +103,10 @@ class HomeScreen extends StatelessWidget {
                         description: 'Rewrite content in different ways',
                         icon: Icons.edit_note,
                         color: AppColors.secondary,
-                        onTap: () => _showComingSoon(context, 'Paraphrase'),
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const ParaphraseScreen()),
+                        ),
                       ),
                       _buildFeatureCard(
                         context,
@@ -341,22 +349,10 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           TextButton(
-            onPressed: () async {
+            onPressed: () {
               Navigator.pop(context);
               Navigator.pop(context); // Close bottom sheet
-              
-              final authProvider = Provider.of<AuthProvider>(context, listen: false);
-              final success = await authProvider.signOut();
-              
-              if (!success && context.mounted) {
-                // Show error message if sign out failed
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(authProvider.errorMessage ?? 'Failed to sign out'),
-                    backgroundColor: AppColors.error,
-                  ),
-                );
-              }
+              Provider.of<AuthProvider>(context, listen: false).signOut();
             },
             child: Text(
               'Sign Out',
